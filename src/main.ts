@@ -6,7 +6,6 @@ import {
 } from './constants';
 import { CropEditor, pxPerMmFromDpi } from './cropEditor';
 import { drawSheet } from './drawSheet';
-import { buildSheetPdf, downloadBytes } from './exportPdf';
 import { computeLayout } from './layout';
 import {
   CUSTOM_PAPER_ID,
@@ -384,6 +383,7 @@ downloadPdfBtn.addEventListener('click', async () => {
   const layout = currentLayout();
   const paper = getSelectedPaper();
   try {
+    const { buildSheetPdf, downloadBytes } = await import('./exportPdf');
     const bytes = await buildSheetPdf(
       layout,
       croppedTile,

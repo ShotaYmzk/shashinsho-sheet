@@ -71,7 +71,7 @@
           </div>
           <div class="theme-toolbar">
             <label class="theme-label" for="theme-select">表示</label>
-            <select id="theme-select" class="theme-select" aria-label="配色テーマ">
+            <select id="theme-select" class="theme-select">
               <option value="system">システムに合わせる</option>
               <option value="light">ライト</option>
               <option value="dark">ダーク</option>
@@ -101,10 +101,8 @@
 
         <section class="card">
           <h2>1. 用紙サイズを選択（L版・A4・プリセット）</h2>
-          <label class="field-label">
-            プリセット
-            <select id="paper-preset" class="select-wide"></select>
-          </label>
+          <label class="field-label" for="paper-preset">用紙プリセット</label>
+          <select id="paper-preset" class="select-wide" aria-describedby="paper-note-l-vs-lban"></select>
           <div
             id="paper-custom-row"
             class="paper-custom-row hidden"
@@ -139,17 +137,15 @@
               </label>
             </div>
           </div>
-          <p class="sub note">
+          <p id="paper-note-l-vs-lban" class="sub note">
             「写真用 L版（89×127mm）」はコンビニの写真プリント用。印刷用紙の「L判（800×1100mm）」とは別です。
           </p>
         </section>
 
         <section class="card">
           <h2>2. 切り抜き寸法を選択（パスポート・履歴書・カスタムmm）</h2>
-          <label class="field-label">
-            プリセット
-            <select id="slot-preset" class="select-wide"></select>
-          </label>
+          <label class="field-label" for="slot-preset">切り抜きプリセット</label>
+          <select id="slot-preset" class="select-wide"></select>
           <div
             class="slot-dims-grid"
             role="group"
@@ -172,6 +168,7 @@
               id="swap-slot-dims"
               class="btn slot-dim-swap"
               title="幅と高さを入れ替え"
+              aria-label="切り抜きの幅と高さを入れ替え"
             >
               ⇄ 入替
             </button>
@@ -192,6 +189,7 @@
 
         <section class="card">
           <h2>3. 写真をアップロード</h2>
+          <label for="file-input" class="field-label file-field-label">証明写真に使う画像ファイル</label>
           <input type="file" id="file-input" accept="image/*" class="file-input" />
         </section>
 
@@ -201,9 +199,15 @@
             枠内でドラッグして位置を合わせ、ズームで調整したあと「切り抜きを確定」してください。
           </p>
           <div class="crop-wrap">
-            <canvas id="crop-canvas" width="380" height="475"></canvas>
+            <canvas
+              id="crop-canvas"
+              width="380"
+              height="475"
+              role="img"
+              aria-label="切り抜き枠内の写真プレビュー。ドラッグで位置を調整します。"
+            ></canvas>
           </div>
-          <label class="slider-label">
+          <label class="slider-label" for="zoom-range">
             ズーム
             <input type="range" id="zoom-range" min="100" max="400" value="100" />
             <span id="zoom-value">100%</span>
@@ -214,11 +218,11 @@
         <section class="card hidden" id="sheet-card">
           <h2>5. レイアウト・PDF／PNGで保存</h2>
           <div class="controls-grid">
-            <label>
+            <label class="field-label" for="margin-mm">
               余白（mm）
               <input type="number" id="margin-mm" min="0" max="80" step="0.5" value="3" />
             </label>
-            <label>
+            <label class="field-label" for="gap-mm">
               写真の間隔（mm）
               <input type="number" id="gap-mm" min="0" max="20" step="0.5" value="2" />
             </label>
@@ -226,7 +230,11 @@
           <p id="layout-summary" class="summary"></p>
           <p id="png-hint" class="hint muted hidden"></p>
           <div class="sheet-wrap">
-            <canvas id="sheet-canvas"></canvas>
+            <canvas
+              id="sheet-canvas"
+              role="img"
+              aria-label="用紙上に並べた証明写真のプレビュー"
+            ></canvas>
           </div>
           <div class="btn-row">
             <button type="button" id="download-png" class="btn primary">PNG をダウンロード（300dpi）</button>

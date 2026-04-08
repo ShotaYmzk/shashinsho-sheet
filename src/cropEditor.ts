@@ -1,3 +1,4 @@
+import { applyCanvasPhotoQuality } from './canvasPhotoQuality';
 import { EXPORT_DPI, MM_PER_INCH, mmToPx } from './constants';
 
 const VIEW_BASE_W = 380;
@@ -65,7 +66,7 @@ export class CropEditor {
   private resizeCanvas(): void {
     const W = this.viewW();
     const H = this.viewH();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 3);
     this.canvas.style.width = `${W}px`;
     this.canvas.style.height = `${H}px`;
     this.canvas.width = Math.round(W * dpr);
@@ -100,6 +101,7 @@ export class CropEditor {
     ctx.fillRect(0, 0, W, H);
 
     if (img && img.naturalWidth > 0) {
+      applyCanvasPhotoQuality(ctx);
       const Iw = img.naturalWidth;
       const Ih = img.naturalHeight;
       const s = this.totalScale();
@@ -142,6 +144,7 @@ export class CropEditor {
     out.height = outH;
     const octx = out.getContext('2d');
     if (!octx) throw new Error('2d');
+    applyCanvasPhotoQuality(octx);
     octx.drawImage(img, sx, sy, sw, sh, 0, 0, outW, outH);
     return out;
   }

@@ -204,6 +204,15 @@ body {
   text-align: left;
 }
 
+label.field-label[for='paper-preset'],
+label.field-label[for='slot-preset'] {
+  margin-bottom: 0.15rem;
+}
+
+.file-field-label {
+  margin-bottom: 0.35rem;
+}
+
 .select-wide {
   width: 100%;
   padding: 0.55rem 0.65rem;

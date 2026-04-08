@@ -214,6 +214,20 @@ export default defineConfig(({ mode }) => {
   const siteOrigin = resolveSiteOrigin(env.VITE_SITE_ORIGIN);
 
   return {
+    esbuild: {
+      drop: mode === 'production' ? (['console', 'debugger'] as const) : [],
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/pdf-lib')) {
+              return 'pdf-lib';
+            }
+          },
+        },
+      },
+    },
     plugins: [
       {
         name: 'html-placeholder-seo',
