@@ -10,14 +10,36 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * featureList の mm はアプリの slot プリセットと一致（履歴書 30×40、免許 24×30 など）。
  */
 function buildJsonLd(origin: string): string {
+  const webPage =
+    origin !== ''
+      ? {
+          '@type': 'WebPage',
+          '@id': `${origin}/#webpage`,
+          url: `${origin}/`,
+          name: '証明写真シート｜ブラウザで無料切り抜き・敷き詰め・PDF出力',
+          description:
+            '証明写真をブラウザだけで切り抜き・敷き詰め・PDF/PNG出力。パスポート・マイナンバーカード・履歴書対応。サーバー送信なし、無料。',
+          inLanguage: 'ja-JP',
+          isPartOf: {
+            '@type': 'WebSite',
+            '@id': `${origin}/#website`,
+            name: '証明写真シート',
+            url: `${origin}/`,
+          },
+        }
+      : null;
+
   const webApp: Record<string, unknown> = {
     '@type': 'WebApplication',
     name: '証明写真シート',
-    description:
-      '証明写真をmm単位で切り抜き、写真用L版・A4・B4などに敷き詰めてPDF・300dpi PNGで保存する無料ブラウザツール。画像はサーバーに送信されません。',
+    description: 'ブラウザで証明写真を切り抜き・敷き詰め・出力するツール。PDF/300dpi PNG対応。画像はサーバーに送信されません。',
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' },
+    author: {
+      '@type': 'Organization',
+      name: '証明写真シート',
+    },
     featureList: [
       'ブラウザ内完結・サーバー送信なし',
       'mm単位の切り抜きサイズ指定',
@@ -32,27 +54,34 @@ function buildJsonLd(origin: string): string {
     webApp.url = `${origin}/`;
   }
 
-  const data = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      webApp,
-      {
+  const graph: unknown[] = [];
+  if (webPage) graph.push(webPage);
+  graph.push(webApp);
+  graph.push({
         '@type': 'FAQPage',
         mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'スマホやパソコンから証明写真シートは作れますか？',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'iOS Safari・Android Chrome・PC の主要ブラウザで利用できます。大判用紙での PNG はメモリ制約で失敗することがあるため、その場合は PDF をご利用ください。',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '背景は自動で無地や青に変わりますか？',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'いいえ。背景の自動削除・色替えは行わず、固定比率の切り抜きと用紙への配置に特化しています。無地背景が必要な場合は別途加工した画像を読み込んでください。',
+            },
+          },
           {
             '@type': 'Question',
             name: '切り抜きの位置やズームを後から変えられますか？',
             acceptedAnswer: {
               '@type': 'Answer',
               text: '「3. 写真を選ぶ」で同じ画像を再選択すると切り抜き画面に戻り、位置・ズームをやり直せます。',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'スマートフォンから使えますか？',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'iOS Safari・Android Chrome で動作します。大判用紙での PNG 生成はメモリ制約で失敗することがあるため、その場合は PDF をご利用ください。',
             },
           },
           {
@@ -160,8 +189,11 @@ function buildJsonLd(origin: string): string {
             },
           },
         ],
-      },
-    ],
+      });
+
+  const data = {
+    '@context': 'https://schema.org',
+    '@graph': graph,
   };
 
   return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;

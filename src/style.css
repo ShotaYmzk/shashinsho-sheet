@@ -146,6 +146,31 @@ body {
   color: var(--text);
 }
 
+.seo-intro {
+  margin: 0 0 1.5rem;
+  padding: 1rem 0 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.seo-intro h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.seo-intro p {
+  margin: 0 0 0.65rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.seo-intro p:last-child {
+  margin-bottom: 0;
+}
+
 .card {
   margin-top: 1.25rem;
   padding: 1.25rem 1.35rem;

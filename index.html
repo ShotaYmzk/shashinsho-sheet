@@ -9,11 +9,11 @@
     />
     <meta
       name="description"
-      content="証明写真・ID写真をオンラインで無料作成。mm単位で切り抜き、写真用L版・A4・B4などに敷き詰めてPDF・300dpi PNGで保存。ブラウザ完結（画像は送信されません）。履歴書・パスポート・マイナンバーカード・免許のプリセット対応。"
+      content="証明写真をブラウザだけで切り抜き・敷き詰め・PDF/PNG出力。パスポート・マイナンバーカード・履歴書対応。サーバー送信なし、無料。"
     />
     <meta
       name="keywords"
-      content="証明写真,ID写真,証明写真シート,証明写真作成,オンライン,無料,パスポート写真,マイナンバーカード,履歴書,L版,PDF,PNG,300dpi,ブラウザ"
+      content="証明写真,ID写真,パスポート写真,マイナンバーカード,履歴書写真,無料,オンライン"
     />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="author" content="証明写真シート" />
@@ -26,24 +26,24 @@
     <meta property="og:locale" content="ja_JP" />
     <meta
       property="og:title"
-      content="証明写真シート｜証明写真・ID写真を無料で作成（mm切り抜き・PDF/PNG）"
+      content="証明写真シート｜ブラウザで無料切り抜き・敷き詰め・PDF出力"
     />
     <meta
       property="og:description"
-      content="証明写真・ID写真をオンラインで無料。mm切り抜き、L版・A4・B4に敷き詰め、PDF・300dpi PNGで保存。ブラウザ内のみ。パスポート・マイナンバー・履歴書プリセット対応。"
+      content="証明写真をブラウザだけで切り抜き・敷き詰め・PDF/PNG出力。パスポート・マイナンバーカード・履歴書対応。サーバー送信なし、無料。"
     />
     <!--SEO_OG_URL-->
     <!--SEO_OG_IMAGE-->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="証明写真シート｜証明写真・ID写真を無料で作成"
+      content="証明写真シート｜ブラウザで無料切り抜き・敷き詰め・PDF出力"
     />
     <meta
       name="twitter:description"
-      content="オンライン無料。mm切り抜き・用紙プリセット・PDF/300dpi PNG。サーバー送信なし。"
+      content="証明写真をブラウザだけで切り抜き・敷き詰め・PDF/PNG出力。パスポート・マイナンバー・履歴書対応。サーバー送信なし、無料。"
     />
-    <title>証明写真シート｜証明写真・ID写真を無料作成（mm切り抜き・PDF/PNG・ブラウザ完結）</title>
+    <title>証明写真シート｜ブラウザで無料切り抜き・敷き詰め・PDF出力</title>
     <script>
       (function () {
         try {
@@ -62,9 +62,11 @@
       <header class="hero">
         <div class="hero-top">
           <div class="hero-brand">
-            <h1>証明写真シート</h1>
+            <h1>証明写真シート｜ブラウザで無料生成</h1>
             <p class="lead">
-              用紙サイズと切り抜き寸法（mm）を選び、写真を<strong>固定比率で切り抜いて</strong>から敷き詰めます。処理はブラウザ内のみです。
+              履歴書・パスポート・マイナンバーカード・免許証などの<strong>証明写真（ID写真）サイズ</strong>を mm
+              で指定し、写真用 L 版や A4 などの用紙に<strong>敷き詰めたシート</strong>を作れます。PDF・300dpi
+              PNG で保存でき、処理はすべてブラウザ内です（画像はサーバーに送りません）。
             </p>
           </div>
           <div class="theme-toolbar">
@@ -79,8 +81,26 @@
       </header>
 
       <main id="main-content">
+        <section class="seo-intro" aria-labelledby="seo-intro-heading">
+          <h2 id="seo-intro-heading">用紙サイズ・切り抜き・証明写真シートについて</h2>
+          <p>
+            スマホやカメラで撮った写真から、指定 mm の証明写真を切り抜き、1
+            枚の用紙に何枚も並べた<strong>証明写真シート</strong>を無料で作れるツールです。コンビニのマルチコピー機や自宅プリンターで使いやすいよう、<strong>写真用
+            L 版（89×127mm）</strong>や A4・B4、印刷用紙の各判型など、多数の用紙プリセットに対応しています。
+          </p>
+          <p>
+            パスポート・マイナンバーカード（35×45mm）、履歴書・就活（24×30mm や 30×40mm
+            など）、運転免許に近い横長サイズなど、よく使われる切り抜きプリセットを選べます。提出先の規格と異なる場合は<strong>カスタム
+            mm 入力</strong>で幅・高さを自由に合わせられます。
+          </p>
+          <p>
+            背景の自動削除や色の自動変換は行いません（お持ちの画像を枠内でドラッグ・ズームして位置調整します）。プライバシー重視の方には、<strong>画像データが外部に送信されない</strong>点も安心材料になります。ネットプリントや印刷会社への入稿用には、300dpi
+            の PNG や PDF をご利用ください。
+          </p>
+        </section>
+
         <section class="card">
-          <h2>1. 用紙サイズ</h2>
+          <h2>1. 用紙サイズを選択（L版・A4・プリセット）</h2>
           <label class="field-label">
             プリセット
             <select id="paper-preset" class="select-wide"></select>
@@ -125,7 +145,7 @@
         </section>
 
         <section class="card">
-          <h2>2. 切り抜きサイズ（1枚あたり・mm）</h2>
+          <h2>2. 切り抜き寸法を選択（パスポート・履歴書・カスタムmm）</h2>
           <label class="field-label">
             プリセット
             <select id="slot-preset" class="select-wide"></select>
@@ -171,12 +191,12 @@
         </section>
 
         <section class="card">
-          <h2>3. 写真を選ぶ</h2>
+          <h2>3. 写真をアップロード</h2>
           <input type="file" id="file-input" accept="image/*" class="file-input" />
         </section>
 
         <section class="card hidden" id="crop-card">
-          <h2>4. 切り抜き</h2>
+          <h2>4. 切り抜き位置の調整（ドラッグ・ズーム）</h2>
           <p class="sub">
             枠内でドラッグして位置を合わせ、ズームで調整したあと「切り抜きを確定」してください。
           </p>
@@ -192,7 +212,7 @@
         </section>
 
         <section class="card hidden" id="sheet-card">
-          <h2>5. レイアウトと保存</h2>
+          <h2>5. レイアウト・PDF／PNGで保存</h2>
           <div class="controls-grid">
             <label>
               余白（mm）
@@ -219,14 +239,20 @@
 
           <h3 class="faq-category">使い方・操作</h3>
           <dl class="faq-list">
+            <dt>スマホやパソコンから証明写真シートは作れますか？</dt>
+            <dd>
+              はい。iOS Safari・Android Chrome・PC
+              の主要ブラウザで利用できます。写真を選び、枠をドラッグして位置を合わせ、ズームを調整してから切り抜きを確定してください。大判用紙での
+              PNG 生成は端末のメモリ制限で失敗することがあるため、そのときは PDF をお試しください。
+            </dd>
+            <dt>背景は自動で無地や青に変わりますか？</dt>
+            <dd>
+              いいえ。本ツールは背景の自動削除・色替えは行いません。お持ちの写真を<strong>固定比率で切り抜き</strong>、mm
+              指定のサイズに合わせて用紙へ並べることに特化しています。無地背景が必要な場合は、あらかじめ別のアプリやサービスで加工した画像を読み込んでください。
+            </dd>
             <dt>切り抜きの位置やズームを後から変えられますか？</dt>
             <dd>
               「3. 写真を選ぶ」で同じ画像をもう一度選択すると切り抜き画面に戻り、位置とズームをやり直せます。確定後に修正したい場合も同様の手順です。
-            </dd>
-            <dt>スマートフォンから使えますか？</dt>
-            <dd>
-              iOS Safari・Android Chrome で動作します。切り抜き位置はドラッグ、ズームはスライダーで調整してください。ただし大判用紙での
-              PNG 生成はデバイスのメモリ制約で失敗することがあります。その場合は PDF をご利用ください。
             </dd>
             <dt>幅と高さを自分で指定するにはどうすればいいですか？</dt>
             <dd>
@@ -311,11 +337,8 @@
 
       <footer class="site-footer">
         <p>
-          <strong>証明写真シート</strong> — 証明写真の切り抜き・敷き詰め・PDF/PNG出力をブラウザだけで行う無料ツール。
-        </p>
-        <p class="footer-meta">
-          公開時は <code>VITE_SITE_ORIGIN</code> を設定してビルドすると、検索エンジン向けの canonical・OGP・sitemap
-          が正しいURLになります（詳細は README）。
+          <strong>証明写真シート</strong> — 証明写真・ID写真の mm 切り抜き、用紙への敷き詰め、PDF／300dpi PNG
+          出力をブラウザだけで行う無料ツール。画像は端末内のみで処理され、サーバーにアップロードされません。
         </p>
       </footer>
     </div>

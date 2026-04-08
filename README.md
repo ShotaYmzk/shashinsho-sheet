@@ -31,8 +31,10 @@ VITE_SITE_ORIGIN=https://あなたのドメイン.example npm run build
 
 **Vercel の場合**
 
+- リポジトリ直下の `vercel.json` で `buildCommand` と `outputDirectory`（`dist`）を明示しています。環境変数 `VITE_SITE_ORIGIN` を `vercel.json` に直書きしないのは、プレビュー用 URL と本番ドメインを分けられるためです。
 - **推奨（canonical を固定）**: プロジェクトの **Settings → Environment Variables** に、Production 向けに `VITE_SITE_ORIGIN` を例として `https://shashinsho-sheet.vercel.app`（独自ドメインならその URL）を登録して再デプロイする。ダッシュボードの値は `process.env` 経由でビルドに渡る（`.env` に書かなくてよい）。
 - **補助**: 変数未設定でも、Vercel がビルド時に渡す `VERCEL_URL` から `https://…` を自動補完して sitemap・canonical 等を生成する。プレビューデプロイでは URL がデプロイごとに変わるため、本番ドメインで揃えたいときは必ず `VITE_SITE_ORIGIN` を設定すること。
+- `robots.txt` と `sitemap.xml` は **`npm run build` 完了時に `dist/` へ書き込まれる**ため、`public/` に固定 URL のコピーを置く必要はありません（プレビュー用デプロイでも正しいオリジンになります）。
 
 設定すると次が **その URL 前提**で埋め込まれます。
 
