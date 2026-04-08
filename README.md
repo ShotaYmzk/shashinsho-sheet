@@ -19,7 +19,7 @@
 npm run build
 ```
 
-`dist/` を静的ホスティング（Cloudflare Pages、Netlify、GitHub Pages、S3+CloudFront など）にアップロードします。
+`dist/` を静的ホスティング（Cloudflare Pages、Netlify、GitHub Pages、S3+CloudFront、[Vercel](https://vercel.com/) など）にアップロードします。
 
 ### 本番 URL の指定（SEO 推奨）
 
@@ -28,6 +28,11 @@ npm run build
 ```bash
 VITE_SITE_ORIGIN=https://あなたのドメイン.example npm run build
 ```
+
+**Vercel の場合**
+
+- **推奨（canonical を固定）**: プロジェクトの **Settings → Environment Variables** に、Production 向けに `VITE_SITE_ORIGIN` を例として `https://shashinsho-sheet.vercel.app`（独自ドメインならその URL）を登録して再デプロイする。ダッシュボードの値は `process.env` 経由でビルドに渡る（`.env` に書かなくてよい）。
+- **補助**: 変数未設定でも、Vercel がビルド時に渡す `VERCEL_URL` から `https://…` を自動補完して sitemap・canonical 等を生成する。プレビューデプロイでは URL がデプロイごとに変わるため、本番ドメインで揃えたいときは必ず `VITE_SITE_ORIGIN` を設定すること。
 
 設定すると次が **その URL 前提**で埋め込まれます。
 

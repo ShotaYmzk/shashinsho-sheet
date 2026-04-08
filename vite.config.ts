@@ -167,10 +167,19 @@ function buildJsonLd(origin: string): string {
   return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
 }
 
+/** 末尾スラッシュを除く。Vercel ではダッシュボードの VITE_SITE_ORIGIN は process.env に載る（loadEnv は .env ファイルのみ）。 */
+function resolveSiteOrigin(viteOriginFromFile: string | undefined): string {
+  const fromVite =
+    (viteOriginFromFile || process.env.VITE_SITE_ORIGIN || '').replace(/\/$/, '');
+  if (fromVite) return fromVite;
+  const vercel = (process.env.VERCEL_URL || '').replace(/\/$/, '').trim();
+  if (vercel) return `https://${vercel}`;
+  return '';
+}
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  /** VITE_SITE_ORIGIN 未設定時は空文字（プレースホルダー・canonical・OG は条件付きで省略） */
-  const siteOrigin = (env.VITE_SITE_ORIGIN ?? '').replace(/\/$/, '');
+  const siteOrigin = resolveSiteOrigin(env.VITE_SITE_ORIGIN);
 
   return {
     plugins: [
