@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="証明写真シート">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#134e4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="80" y="80" width="1040" height="470" rx="24" fill="rgba(255,255,255,0.08)" stroke="rgba(110,231,183,0.5)" stroke-width="2"/>
+  <text x="120" y="200" fill="#f8fafc" font-family="system-ui,sans-serif" font-size="52" font-weight="700">証明写真シート</text>
+  <text x="120" y="270" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="28">可変用紙・mm切り抜き・PDF/PNG・ブラウザ完結</text>
+  <g transform="translate(120,340)">
+    <rect width="140" height="180" rx="8" fill="#34d399" opacity="0.9"/>
+    <rect x="160" width="140" height="180" rx="8" fill="#34d399" opacity="0.65"/>
+    <rect x="320" width="140" height="180" rx="8" fill="#34d399" opacity="0.4"/>
+  </g>
+  <text x="120" y="580" fill="#64748b" font-family="system-ui,sans-serif" font-size="22">L版 / A4 / 印刷用紙プリセット対応</text>
+</svg>

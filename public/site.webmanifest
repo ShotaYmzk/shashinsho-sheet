@@ -1,0 +1,19 @@
+{
+  "name": "証明写真シート（可変用紙・切り抜き）",
+  "short_name": "証明写真シート",
+  "description": "証明写真をmmで切り抜き、用紙に敷き詰めてPDF・PNGで保存。ブラウザ内のみで処理。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f12",
+  "theme_color": "#0f0f12",
+  "lang": "ja",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

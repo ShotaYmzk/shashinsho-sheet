@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="証明写真をmm単位で切り抜き、写真用L版・A4・B4・ハトロン判などに敷き詰めてPDF・300dpi PNGで保存。無料・ブラウザ完結（画像はサーバーに送信されません）。履歴書・免許・パスポートサイズのプリセット対応。"
+    />
+    <meta
+      name="keywords"
+      content="証明写真,顔写真,シート,L版,89×127,A4,B4,PDF,PNG,300dpi,履歴書,免許証,パスポート,レイアウト,無料,ブラウザ,クライアント完結"
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="証明写真シート" />
+    <meta name="theme-color" content="#0f0f12" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8f7fc" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!--SEO_CANONICAL-->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta
+      property="og:title"
+      content="証明写真シート｜可変用紙・mm切り抜き・PDF/PNG（無料・ブラウザ完結）"
+    />
+    <meta
+      property="og:description"
+      content="証明写真をmm単位で切り抜き、L版・A4・B4などに敷き詰めてPDF・300dpi PNGで保存。ブラウザ内のみで処理し、画像はサーバーに送信されません。"
+    />
+    <!--SEO_OG_URL-->
+    <!--SEO_OG_IMAGE-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="証明写真シート｜可変用紙・mm切り抜き・PDF/PNG"
+    />
+    <meta
+      name="twitter:description"
+      content="mm切り抜き・多数の用紙プリセット・PDF/300dpi PNG。サーバー送信なしの無料ブラウザツール。"
+    />
+    <title>証明写真シート｜可変用紙・mm切り抜き・PDF/PNG（無料・ブラウザ完結）</title>
+    <script>
+      (function () {
+        try {
+          var k = 'color-scheme';
+          var t = localStorage.getItem(k);
+          if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+          else if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        } catch (e) {}
+      })();
+    </script>
+    <!--JSON_LD-->
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">本文へスキップ</a>
+    <div id="app">
+      <header class="hero">
+        <div class="hero-top">
+          <div class="hero-brand">
+            <h1>証明写真シート</h1>
+            <p class="lead">
+              用紙サイズと切り抜き寸法（mm）を選び、写真を<strong>固定比率で切り抜いて</strong>から敷き詰めます。処理はブラウザ内のみです。
+            </p>
+          </div>
+          <div class="theme-toolbar">
+            <label class="theme-label" for="theme-select">表示</label>
+            <select id="theme-select" class="theme-select" aria-label="配色テーマ">
+              <option value="system">システムに合わせる</option>
+              <option value="light">ライト</option>
+              <option value="dark">ダーク</option>
+            </select>
+          </div>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <section class="card">
+          <h2>1. 用紙サイズ</h2>
+          <label class="field-label">
+            プリセット
+            <select id="paper-preset" class="select-wide"></select>
+          </label>
+          <div
+            id="paper-custom-row"
+            class="paper-custom-row hidden"
+            role="group"
+            aria-label="カスタム用紙の幅と高さ（mm）"
+          >
+            <p class="sub paper-custom-hint">「カスタム」を選んだとき、用紙の外寸を mm で指定します。</p>
+            <div class="paper-custom-stack">
+              <label class="field-label paper-custom-field" for="paper-width-mm">
+                横（幅）mm
+                <input
+                  type="number"
+                  id="paper-width-mm"
+                  class="slot-dim-input paper-dim-input"
+                  min="10"
+                  max="1200"
+                  step="1"
+                  value="89"
+                />
+              </label>
+              <label class="field-label paper-custom-field" for="paper-height-mm">
+                縦（高さ）mm
+                <input
+                  type="number"
+                  id="paper-height-mm"
+                  class="slot-dim-input paper-dim-input"
+                  min="10"
+                  max="1200"
+                  step="1"
+                  value="127"
+                />
+              </label>
+            </div>
+          </div>
+          <p class="sub note">
+            「写真用 L版（89×127mm）」はコンビニの写真プリント用。印刷用紙の「L判（800×1100mm）」とは別です。
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>2. 切り抜きサイズ（1枚あたり・mm）</h2>
+          <label class="field-label">
+            プリセット
+            <select id="slot-preset" class="select-wide"></select>
+          </label>
+          <div
+            class="slot-dims-grid"
+            role="group"
+            aria-label="切り抜きの幅と高さ（mm）"
+          >
+            <label class="slot-dim-caption" for="slot-width-mm">横（幅）</label>
+            <span class="slot-dim-caption-spacer" aria-hidden="true"></span>
+            <label class="slot-dim-caption" for="slot-height-mm">縦（高さ）</label>
+            <input
+              type="number"
+              id="slot-width-mm"
+              class="slot-dim-input"
+              min="1"
+              max="200"
+              step="0.5"
+              value="24"
+            />
+            <button
+              type="button"
+              id="swap-slot-dims"
+              class="btn slot-dim-swap"
+              title="幅と高さを入れ替え"
+            >
+              ⇄ 入替
+            </button>
+            <input
+              type="number"
+              id="slot-height-mm"
+              class="slot-dim-input"
+              min="1"
+              max="200"
+              step="0.5"
+              value="30"
+            />
+          </div>
+          <p id="settings-hint" class="hint hidden">
+            用紙または切り抜きサイズを変えたため、切り抜きをやり直してください。
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>3. 写真を選ぶ</h2>
+          <input type="file" id="file-input" accept="image/*" class="file-input" />
+        </section>
+
+        <section class="card hidden" id="crop-card">
+          <h2>4. 切り抜き</h2>
+          <p class="sub">
+            枠内でドラッグして位置を合わせ、ズームで調整したあと「切り抜きを確定」してください。
+          </p>
+          <div class="crop-wrap">
+            <canvas id="crop-canvas" width="380" height="475"></canvas>
+          </div>
+          <label class="slider-label">
+            ズーム
+            <input type="range" id="zoom-range" min="100" max="400" value="100" />
+            <span id="zoom-value">100%</span>
+          </label>
+          <button type="button" id="confirm-crop" class="btn primary">切り抜きを確定</button>
+        </section>
+
+        <section class="card hidden" id="sheet-card">
+          <h2>5. レイアウトと保存</h2>
+          <div class="controls-grid">
+            <label>
+              余白（mm）
+              <input type="number" id="margin-mm" min="0" max="80" step="0.5" value="3" />
+            </label>
+            <label>
+              写真の間隔（mm）
+              <input type="number" id="gap-mm" min="0" max="20" step="0.5" value="2" />
+            </label>
+          </div>
+          <p id="layout-summary" class="summary"></p>
+          <p id="png-hint" class="hint muted hidden"></p>
+          <div class="sheet-wrap">
+            <canvas id="sheet-canvas"></canvas>
+          </div>
+          <div class="btn-row">
+            <button type="button" id="download-png" class="btn primary">PNG をダウンロード（300dpi）</button>
+            <button type="button" id="download-pdf" class="btn">PDF をダウンロード</button>
+          </div>
+        </section>
+
+        <section class="card faq-card" aria-labelledby="faq-heading">
+          <h2 id="faq-heading">よくある質問</h2>
+
+          <h3 class="faq-category">使い方・操作</h3>
+          <dl class="faq-list">
+            <dt>切り抜きの位置やズームを後から変えられますか？</dt>
+            <dd>
+              「3. 写真を選ぶ」で同じ画像をもう一度選択すると切り抜き画面に戻り、位置とズームをやり直せます。確定後に修正したい場合も同様の手順です。
+            </dd>
+            <dt>スマートフォンから使えますか？</dt>
+            <dd>
+              iOS Safari・Android Chrome で動作します。切り抜き位置はドラッグ、ズームはスライダーで調整してください。ただし大判用紙での
+              PNG 生成はデバイスのメモリ制約で失敗することがあります。その場合は PDF をご利用ください。
+            </dd>
+            <dt>幅と高さを自分で指定するにはどうすればいいですか？</dt>
+            <dd>
+              「2. 切り抜きサイズ」のプリセット一覧で「カスタム」を選ぶと、横（幅）・縦（高さ）を mm
+              単位で自由に入力できます。⇄ ボタンで幅と高さを入れ替えることもできます。
+            </dd>
+            <dt>余白や写真の間隔はどこで変えますか？</dt>
+            <dd>
+              切り抜き確定後に表示される「5. レイアウトと保存」セクションの「余白（mm）」「写真の間隔（mm）」入力欄で変更できます。変更は即座にプレビューに反映されます。
+            </dd>
+          </dl>
+
+          <h3 class="faq-category">印刷・入稿</h3>
+          <dl class="faq-list">
+            <dt>コンビニ（セブン・ローソン・ファミマ）で印刷できますか？</dt>
+            <dd>
+              PDF または PNG を USB メモリやスマホに保存してマルチコピー機で印刷できます。写真用 L
+              版（89×127mm）に配置した PDF を「写真プリント（L 判）」で印刷するのが最も一般的です。「フチなし印刷」が選べる場合は推奨します。
+            </dd>
+            <dt>データ入稿（ネットプリント・印刷会社）にも使えますか？</dt>
+            <dd>
+              使えます。PNG（300dpi・sRGB）はそのまま入稿データとして利用できます。入稿先によって解像度・色空間・ファイル形式の要件が異なるため、事前に仕様をご確認ください。
+            </dd>
+            <dt>印刷したら余白が大きくなってしまいました。</dt>
+            <dd>
+              印刷ダイアログで「実際のサイズ（100%）」または「用紙に合わせて拡大縮小しない」を選択してください。「ページに合わせる」がオンになっていると余白や写真サイズが変わります。
+            </dd>
+          </dl>
+
+          <h3 class="faq-category">サイズ・規格</h3>
+          <dl class="faq-list">
+            <dt>パスポート・マイナンバーカードの規定サイズは何 mm ですか？</dt>
+            <dd>
+              パスポートおよびマイナンバーカードともに縦 45mm × 横 35mm です（パスポートは顔の縦長さ 34mm
+              以上という追加規定あり）。プリセット「パスポート／マイナンバー（35×45mm）」を選ぶと自動設定されます。
+            </dd>
+            <dt>履歴書・就活用の証明写真のサイズは？</dt>
+            <dd>
+              一般的な履歴書用は縦 30mm × 横 24mm です。一部の企業・大学指定書類では縦 40mm × 横 30mm
+              を求める場合もあります。提出先の指定サイズをご確認のうえ、カスタム入力で対応してください。
+            </dd>
+            <dt>「写真用 L 版」と「L 判」の違いは何ですか？</dt>
+            <dd>
+              写真用 L 版（89×127mm）はカメラのプリントや証明写真シートに使う小型用紙です。L
+              判（800×1100mm）は印刷業界の大判用紙規格でまったく別のものです。コンビニ・写真館でのプリントには「写真用 L 版」を選択してください。
+            </dd>
+            <dt>用紙サイズをミリ単位で自由に指定できますか？</dt>
+            <dd>
+              「1. 用紙サイズ」プリセットで「カスタム」を選ぶと、用紙の幅・高さを mm
+              単位で自由に入力できます。同人誌・会員証・社員証など特殊サイズにも対応できます。
+            </dd>
+          </dl>
+
+          <h3 class="faq-category">プライバシー・セキュリティ</h3>
+          <dl class="faq-list">
+            <dt>写真はサーバーに送られますか？</dt>
+            <dd>
+              送られません。切り抜き・レイアウト・PDF/PNG の生成はすべてお使いのブラウザ内（クライアント側）だけで行われます。画像データが外部に送信されることは一切ありません。
+            </dd>
+            <dt>オフライン（インターネット未接続）でも使えますか？</dt>
+            <dd>
+              初回アクセス後にページを開いた状態であれば、切り抜き・PDF/PNG
+              生成はオフラインでも動作します。サービスワーカー（PWA）によるキャッシュには対応していないため、再読み込みにはインターネット接続が必要です。
+            </dd>
+          </dl>
+
+          <h3 class="faq-category">トラブル・エラー</h3>
+          <dl class="faq-list">
+            <dt>ファイルを選んでも画像が表示されません。</dt>
+            <dd>
+              iPhone のデフォルト形式 HEIC は一部ブラウザで非対応です。iPhone の「設定 → カメラ → フォーマット →
+              互換性優先」に変更するか、JPEG/PNG に変換してから読み込んでください。ファイルサイズが 20MB
+              を超える場合もブラウザがフリーズすることがあります。
+            </dd>
+            <dt>PDF をダウンロードしたが、印刷すると写真がぼやけます。</dt>
+            <dd>
+              印刷設定の「実際のサイズ（100%）」を選択してください。「ページに合わせる」がオンになっているとサイズが変わり、見かけ上の解像度が下がります。プリンタ側の品質設定を「高品質」にすることも有効です。
+            </dd>
+          </dl>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>
+          <strong>証明写真シート</strong> — 証明写真の切り抜き・敷き詰め・PDF/PNG出力をブラウザだけで行う無料ツール。
+        </p>
+        <p class="footer-meta">
+          公開時は <code>VITE_SITE_ORIGIN</code> を設定してビルドすると、検索エンジン向けの canonical・OGP・sitemap
+          が正しいURLになります（詳細は README）。
+        </p>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
