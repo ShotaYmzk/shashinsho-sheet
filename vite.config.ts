@@ -16,9 +16,9 @@ function buildJsonLd(origin: string): string {
           '@type': 'WebPage',
           '@id': `${origin}/#webpage`,
           url: `${origin}/`,
-          name: '証明写真シート｜ブラウザで無料切り抜き・敷き詰め・PDF出力',
+          name: '証明写真シート｜ブラウザで無料生成・コンビニ印刷対応',
           description:
-            '証明写真をブラウザだけで切り抜き・敷き詰め・PDF/PNG出力。パスポート・マイナンバーカード・履歴書対応。サーバー送信なし、無料。',
+            '証明写真シートをブラウザだけで無料生成。写真用L版・A4に敷き詰めPDF・300dpi PNG保存&コンビニ印刷対応。パスポート35×45mm・履歴書24×30mm・マイナンバーカード対応。サーバーへの送信なし。',
           inLanguage: 'ja-JP',
           isPartOf: {
             '@type': 'WebSite',
@@ -32,7 +32,8 @@ function buildJsonLd(origin: string): string {
   const webApp: Record<string, unknown> = {
     '@type': 'WebApplication',
     name: '証明写真シート',
-    description: 'ブラウザで証明写真を切り抜き・敷き詰め・出力するツール。PDF/300dpi PNG対応。画像はサーバーに送信されません。',
+    alternateName: '証明写真シート無料生成ツール',
+    description: 'ブラウザだけで証明写真シートを無料生成。写真用L版・A4に敷き詰めPDF・300dpi PNG保存&コンビニ印刷対応。パスポート35×45mm・履歴書24×30mm・マイナンバーカード対応。サーバーへの送信なし。',
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' },
@@ -41,11 +42,12 @@ function buildJsonLd(origin: string): string {
       name: '証明写真シート',
     },
     featureList: [
-      'ブラウザ内完結・サーバー送信なし',
+      'ブラウザ内完結・サーバー送信なし・アプリ不要・登録不要',
       'mm単位の切り抜きサイズ指定',
       '写真用L版（89×127mm）・A4・B4・ハトロン判など多数の用紙プリセット＋カスタムmm指定',
       '汎用（24×30mm）・横長（30×24mm）・履歴書（30×40mm）・免許証（24×30mm）・パスポート／マイナンバー（35×45mm）サイズプリセット',
       'PDF・300dpi PNGダウンロード',
+      'コンビニ（セブン・ローソン・ファミマ）のマルチコピー機で印刷可能',
       '余白・写真間隔のmm指定',
     ],
     inLanguage: 'ja',
@@ -58,8 +60,65 @@ function buildJsonLd(origin: string): string {
   if (webPage) graph.push(webPage);
   graph.push(webApp);
   graph.push({
+    '@type': 'HowTo',
+    name: '証明写真シートをブラウザで無料生成する方法',
+    description: '写真用L版・A4などの用紙に証明写真を敷き詰めたシートをブラウザだけで作る手順です。',
+    totalTime: 'PT2M',
+    tool: [{ '@type': 'HowToTool', name: 'Webブラウザ（Chrome・Safari・Firefox等）' }],
+    supply: [{ '@type': 'HowToSupply', name: '証明写真に使う画像ファイル（JPEG・PNG等）' }],
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: '用紙サイズを選ぶ',
+        text: '「写真用L版（89×127mm）」「A4」などの用紙プリセットを選択します。特殊サイズはカスタムmm入力で指定できます。',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: '証明写真サイズを選ぶ',
+        text: 'パスポート（35×45mm）・履歴書（24×30mm）・マイナンバーカードなどのプリセットを選択します。提出先の規格に合わせてカスタムmmで指定も可能です。',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: '写真をアップロードする',
+        text: 'スマホやパソコンから証明写真に使う画像ファイル（JPEG・PNG等）を選択します。',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: '切り抜き位置を調整する',
+        text: '枠内でドラッグして顔の位置を合わせ、ズームスライダーで拡大縮小したあと「切り抜きを確定」ボタンを押します。',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 5,
+        name: 'PDFまたはPNGをダウンロードする',
+        text: '余白・写真間隔を調整し、「PDFをダウンロード」または「PNGをダウンロード（300dpi）」を押して保存します。コンビニのマルチコピー機や自宅プリンターで印刷できます。',
+      },
+    ],
+  });
+
+  graph.push({
         '@type': 'FAQPage',
         mainEntity: [
+          {
+            '@type': 'Question',
+            name: '証明写真シートを無料で作れますか？',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'はい、完全無料で作れます。アカウント登録・アプリのインストールも不要です。ブラウザでこのページを開くだけで利用できます。',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'L版1枚に証明写真は何枚入りますか？',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '写真用L版（89×127mm）にパスポートサイズ（35×45mm）を余白3mm・間隔2mmで配置した場合、2列×2行の4枚が入ります。履歴書サイズ（24×30mm）では3列×3行の9枚前後が入ります。枚数はレイアウトプレビューで確認できます。',
+            },
+          },
           {
             '@type': 'Question',
             name: 'スマホやパソコンから証明写真シートは作れますか？',
