@@ -1,11 +1,17 @@
 import { applyCanvasPhotoQuality } from './canvasPhotoQuality';
 import { EXPORT_DPI, MM_PER_INCH, mmToPx } from './constants';
+import { drawHorizontalMmRuler, drawVerticalMmRuler } from './cropRulers';
 
 const VIEW_BASE_W = 380;
+
+const RULER_TOP_CSS_H = 30;
+
+export type CropRulerCanvases = { top: HTMLCanvasElement; left: HTMLCanvasElement };
 
 export class CropEditor {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
+  private rulers: CropRulerCanvases | null = null;
   private img: HTMLImageElement | null = null;
   /** 切り抜き枠の物理サイズ（横×縦 mm） */
   private slotWmm = 24;
@@ -18,11 +24,12 @@ export class CropEditor {
   private lastX = 0;
   private lastY = 0;
 
-  constructor(canvas: HTMLCanvasElement) {
+  constructor(canvas: HTMLCanvasElement, rulers?: CropRulerCanvases | null) {
     const ctx = canvas.getContext('2d');
     if (!ctx) throw new Error('Canvas 2d unsupported');
     this.canvas = canvas;
     this.ctx = ctx;
+    this.rulers = rulers ?? null;
     this.bindPointer();
   }
 
@@ -72,6 +79,16 @@ export class CropEditor {
     this.canvas.width = Math.round(W * dpr);
     this.canvas.height = Math.round(H * dpr);
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.syncRulers();
+  }
+
+  /** 目盛りのみ再描画（テーマ変更など） */
+  syncRulers(): void {
+    if (!this.rulers) return;
+    const W = this.viewW();
+    const H = this.viewH();
+    drawHorizontalMmRuler(this.rulers.top, this.slotWmm, W, RULER_TOP_CSS_H);
+    drawVerticalMmRuler(this.rulers.left, this.slotHmm, H);
   }
 
   private baseScale(): number {
@@ -118,6 +135,35 @@ export class CropEditor {
     ctx.strokeStyle = 'rgba(255,255,255,0.9)';
     ctx.lineWidth = 2;
     ctx.strokeRect(1, 1, W - 2, H - 2);
+
+    // 三分割ガイド（縦2・横2の点線）。出力画像には含めないプレビューのみ。
+    const v1 = Math.round(W / 3);
+    const v2 = Math.round((2 * W) / 3);
+    const h1 = Math.round(H / 3);
+    const h2 = Math.round((2 * H) / 3);
+    const dash = Math.max(4, Math.round(4 * dpr));
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.88)';
+    ctx.lineWidth = 1;
+    ctx.lineCap = 'butt';
+    ctx.setLineDash([dash, Math.round(dash * 0.75)]);
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.45)';
+    ctx.shadowBlur = 2;
+    ctx.beginPath();
+    ctx.moveTo(v1 + 0.5, 0);
+    ctx.lineTo(v1 + 0.5, H);
+    ctx.moveTo(v2 + 0.5, 0);
+    ctx.lineTo(v2 + 0.5, H);
+    ctx.moveTo(0, h1 + 0.5);
+    ctx.lineTo(W, h1 + 0.5);
+    ctx.moveTo(0, h2 + 0.5);
+    ctx.lineTo(W, h2 + 0.5);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.shadowBlur = 0;
+    ctx.restore();
+
+    this.syncRulers();
   }
 
   /** 印刷用 DPI の切り抜き（スロットmm と同じ縦横比） */

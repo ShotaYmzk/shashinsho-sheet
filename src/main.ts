@@ -4,7 +4,7 @@ import {
   EXPORT_DPI,
   PNG_MAX_DIMENSION_PX,
 } from './constants';
-import { CropEditor, pxPerMmFromDpi } from './cropEditor';
+import { CropEditor, type CropRulerCanvases, pxPerMmFromDpi } from './cropEditor';
 import { drawSheet } from './drawSheet';
 import { computeLayout } from './layout';
 import {
@@ -37,6 +37,8 @@ const fileInput = document.querySelector<HTMLInputElement>('#file-input')!;
 const cropCard = document.querySelector('#crop-card')!;
 const sheetCard = document.querySelector('#sheet-card')!;
 const cropCanvas = document.querySelector<HTMLCanvasElement>('#crop-canvas')!;
+const cropRulerTop = document.querySelector<HTMLCanvasElement>('#crop-ruler-top');
+const cropRulerLeft = document.querySelector<HTMLCanvasElement>('#crop-ruler-left');
 const sheetCanvas = document.querySelector<HTMLCanvasElement>('#sheet-canvas')!;
 const zoomRange = document.querySelector<HTMLInputElement>('#zoom-range')!;
 const zoomValue = document.querySelector('#zoom-value')!;
@@ -49,7 +51,9 @@ const downloadPngBtn = document.querySelector<HTMLButtonElement>('#download-png'
 const downloadPdfBtn = document.querySelector<HTMLButtonElement>('#download-pdf')!;
 const pngHint = document.querySelector('#png-hint')!;
 
-const cropEditor = new CropEditor(cropCanvas);
+const cropRulers: CropRulerCanvases | null =
+  cropRulerTop && cropRulerLeft ? { top: cropRulerTop, left: cropRulerLeft } : null;
+const cropEditor = new CropEditor(cropCanvas, cropRulers);
 
 let sourceImage: HTMLImageElement | null = null;
 let croppedTile: HTMLCanvasElement | null = null;
@@ -399,3 +403,6 @@ downloadPdfBtn.addEventListener('click', async () => {
 zoomValue.textContent = `${zoomRange.value}%`;
 
 initTheme();
+document.querySelector('#theme-select')?.addEventListener('change', () => {
+  cropEditor.syncRulers();
+});

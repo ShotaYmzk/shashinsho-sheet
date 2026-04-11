@@ -198,14 +198,40 @@
           <p class="sub">
             枠内でドラッグして位置を合わせ、ズームで調整したあと「切り抜きを確定」してください。
           </p>
-          <div class="crop-wrap">
+          <div class="crop-ruler-grid" aria-label="切り抜き枠の mm 目盛りとプレビュー">
+            <div
+              class="crop-ruler-origin"
+              title="左上を 0 mm とした距離目盛りです。横が幅、縦が高さ（mm）。"
+              role="note"
+              aria-label="原点。左上を 0 mm、横方向が幅、縦方向が高さのミリ目盛りです。"
+            >
+              <span class="crop-ruler-origin-title">原点</span>
+              <span class="crop-ruler-origin-axes">横 →<span class="crop-ruler-origin-sep">·</span>縦 ↓</span>
+              <span class="crop-ruler-origin-note">左上 0 mm</span>
+            </div>
             <canvas
-              id="crop-canvas"
+              id="crop-ruler-top"
+              class="crop-ruler-top"
               width="380"
-              height="475"
-              role="img"
-              aria-label="切り抜き枠内の写真プレビュー。ドラッグで位置を調整します。"
+              height="30"
+              aria-label="横方向の距離（mm）"
             ></canvas>
+            <canvas
+              id="crop-ruler-left"
+              class="crop-ruler-left"
+              width="48"
+              height="475"
+              aria-label="縦方向の距離（mm）"
+            ></canvas>
+            <div class="crop-wrap">
+              <canvas
+                id="crop-canvas"
+                width="380"
+                height="475"
+                role="img"
+                aria-label="切り抜き枠内の写真プレビュー。ドラッグで位置を調整します。"
+              ></canvas>
+            </div>
           </div>
           <label class="slider-label" for="zoom-range">
             ズーム
